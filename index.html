@@ -114,8 +114,48 @@
             gap: 20px;
         }
 
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 10px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .checkbox-item:hover {
+            background: #e3f2fd;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
         @media (max-width: 768px) {
             .form-row {
+                grid-template-columns: 1fr;
+            }
+            .checkbox-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -331,6 +371,56 @@
                             </select>
                         </div>
                     </div>
+                    
+                    <!-- Task Issue Types -->
+                    <div class="form-group">
+                        <label>Task Issue Types</label>
+                        <div class="info-tooltip">
+                            <span class="tooltip-icon">?</span>
+                            <span class="tooltip-text">
+                                Select multiple issue types that may occur in this task. These will be saved as comma-separated values.
+                            </span>
+                        </div>
+                        <div class="checkbox-grid">
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="build_dependency" name="task_issue_types" value="build_dependency">
+                                <label for="build_dependency">Build/Dependency</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="code_quality_structure" name="task_issue_types" value="code_quality_structure">
+                                <label for="code_quality_structure">Code Quality/Structure</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="data_schema" name="task_issue_types" value="data_schema">
+                                <label for="data_schema">Data/Schema</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="documentation_readme" name="task_issue_types" value="documentation_readme">
+                                <label for="documentation_readme">Documentation/Readme</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="performance" name="task_issue_types" value="performance">
+                                <label for="performance">Performance</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="test_ci_cd" name="task_issue_types" value="test_ci_cd">
+                                <label for="test_ci_cd">Test/CI-CD</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="recurring_code_issue" name="task_issue_types" value="recurring_code_issue">
+                                <label for="recurring_code_issue">Recurring Code Issue</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="assumption_instead_of_clarification" name="task_issue_types" value="assumption_instead_of_clarification">
+                                <label for="assumption_instead_of_clarification">Assumption Instead of Clarification</label>
+                            </div>
+                            <div class="checkbox-item">
+                                <input type="checkbox" id="hallucination" name="task_issue_types" value="hallucination">
+                                <label for="hallucination">Hallucination</label>
+                            </div>
+                        </div>
+                    </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="root_gdrive">Root Google Drive Link</label>
@@ -577,6 +667,14 @@
         function exportJSON() {
             const formData = new FormData(document.getElementById('jsonForm'));
             
+            // Get selected task issue types as comma-separated string
+            const selectedIssueTypes = [];
+            const checkboxes = document.querySelectorAll('input[name="task_issue_types"]:checked');
+            checkboxes.forEach(checkbox => {
+                selectedIssueTypes.push(checkbox.value);
+            });
+            const taskIssueTypesString = selectedIssueTypes.join(', ');
+            
             // Build the JSON structure
             const jsonData = {
                 hfi_id: formData.get('hfi_id') || "",
@@ -588,6 +686,7 @@
                 root_gdrive: formData.get('root_gdrive') || "",
                 final_codebase_link: formData.get('final_codebase_link') || "",
                 usecase: formData.get('usecase') || "",
+                task_issue_types: taskIssueTypesString,
                 final_comment: {
                     pros: formData.get('final_comment_pros') || "",
                     cons: formData.get('final_comment_cons') || ""
