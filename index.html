@@ -300,6 +300,7 @@
     <div class="container">
         <div class="header">
             <h1>P28 - PR Writer V2 - JSON Generator</h1>
+            <p>Agentic Coding Metadata Creator</p>
             <p>Fill out the form to generate your structured JSON data</p>
         </div>
 
@@ -313,14 +314,7 @@
                             <label for="hfi_id">HFI ID <span class="required">*</span></label>
                             <input type="text" id="hfi_id" name="hfi_id" required placeholder="xxxx-xxx-xxx">
                         </div>
-                        <div class="form-group">
-                            <label for="task_type">Task Type <span class="required">*</span></label>
-                            <select id="task_type" name="task_type" required>
-                                <option value="">Select task type</option>
-                                <option value="new">New Task</option>
-                                <option value="rework">Rework</option>
-                            </select>
-                        </div>
+                        
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -336,9 +330,9 @@
                             <label for="interface">Interface <span class="required">*</span></label>
                             <select id="interface" name="interface" required>
                                 <option value="">Select interface</option>
-                                <option value="pr_writer_v2">PR Writer Python v2</option>
-                                <option value="pr_writer_rust_v2">PR Writer Rust v2</option>
-                                <option value="pr_writer_javascript_v2">PR Writer JavaScript v2</option>
+                                <option value="agentic_coding">Agentic Coding (Python)</option>
+                                <option value="agentic_coding_rust">Agentic Coding (Rust)</option>
+                                <option value="agentic_coding_javascript">Agentic Coding (JavaScript/TypeScript)</option>
                             </select>
                         </div>
                     </div>
@@ -357,69 +351,26 @@
                             <input type="text" id="jira" name="jira" placeholder="ANTHS-xxxx">
                         </div>
                         <div class="form-group">
-                            <label for="usecase">Use Case <span class="required">*</span></label>
-                            <select id="usecase" name="usecase" required>
-                                <option value="">Select use case</option>
-                                <option value="feature_implementation">Feature Implementation</option>
-                                <option value="feature_extension">Feature Extension</option>
-                                <option value="code_refactor">Code Refactor</option>
-                                <option value="optimization_testing">Optimization Testing</option>
-                                <option value="feature_reimplementation">Feature Reimplementation</option>
-                                <option value="test_coverage">Test Coverage</option>
-                                <option value="test_coverage_bootstrap">Test Coverage Bootstrap</option>
-                                <option value="debugging_fixes">Debugging Fixes</option>
-                            </select>
+                            <label for="old_jira">Old JIRA Ticket</label>
+                            <input type="text" id="old_jira" name="old_jira" placeholder="ANTHS-xxxx (if any)">
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="usecase">Use Case <span class="required">*</span></label>
+                        <select id="usecase" name="usecase" required>
+                            <option value="">Select use case</option>
+                            <option value="feature_implementation">Feature Implementation</option>
+                            <option value="feature_extension">Feature Extension</option>
+                            <option value="code_refactor">Code Refactor</option>
+                            <option value="optimization_testing">Optimization Testing</option>
+                            <option value="feature_reimplementation">Feature Reimplementation</option>
+                            <option value="test_coverage">Test Coverage</option>
+                            <option value="test_coverage_bootstrap">Test Coverage Bootstrap</option>
+                            <option value="debugging_fixes">Debugging Fixes</option>
+                        </select>
                     </div>
                     
-                    <!-- Task Issue Types -->
-                    <div class="form-group">
-                        <label>Task Issue Types</label>
-                        <div class="info-tooltip">
-                            <span class="tooltip-icon">?</span>
-                            <span class="tooltip-text">
-                                Select multiple issue types that may occur in this task. These will be saved as comma-separated values.
-                            </span>
-                        </div>
-                        <div class="checkbox-grid">
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="build_dependency" name="task_issue_types" value="build_dependency">
-                                <label for="build_dependency">Build/Dependency</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="code_quality_structure" name="task_issue_types" value="code_quality_structure">
-                                <label for="code_quality_structure">Code Quality/Structure</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="data_schema" name="task_issue_types" value="data_schema">
-                                <label for="data_schema">Data/Schema</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="documentation_readme" name="task_issue_types" value="documentation_readme">
-                                <label for="documentation_readme">Documentation/Readme</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="performance" name="task_issue_types" value="performance">
-                                <label for="performance">Performance</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="test_ci_cd" name="task_issue_types" value="test_ci_cd">
-                                <label for="test_ci_cd">Test/CI-CD</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="recurring_code_issue" name="task_issue_types" value="recurring_code_issue">
-                                <label for="recurring_code_issue">Recurring Code Issue</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="assumption_instead_of_clarification" name="task_issue_types" value="assumption_instead_of_clarification">
-                                <label for="assumption_instead_of_clarification">Assumption Instead of Clarification</label>
-                            </div>
-                            <div class="checkbox-item">
-                                <input type="checkbox" id="hallucination" name="task_issue_types" value="hallucination">
-                                <label for="hallucination">Hallucination</label>
-                            </div>
-                        </div>
-                    </div>
+                    
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -433,18 +384,177 @@
                     </div>
                 </div>
 
-                <!-- Final Comments -->
+                
+                <!-- Model Preference -->
                 <div class="form-section">
-                    <h3>Final Comment</h3>
-                    <span>This is the final comment that dev will submit on the interaction portal.</span>
+                    <h3>Model Preference</h3>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="final_comment_pros">Pros</label>
-                            <textarea id="final_comment_pros" name="final_comment_pros" placeholder="List positive aspects and benefits..."></textarea>
+                            <label for="model_preferences">Model Preference (-4 to 4)</label>
+                            <select id="model_preferences" name="model_preferences">
+                                <option value="">Select preference</option>
+                                <option value="-4">-4</option>
+                                <option value="-3">-3</option>
+                                <option value="-2">-2</option>
+                                <option value="-1">-1</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="final_comment_cons">Cons</label>
-                            <textarea id="final_comment_cons" name="final_comment_cons" placeholder="List negative aspects and drawbacks..."></textarea>
+                            <label for="model_preference_comment">Model Preference Comment</label>
+                            <textarea id="model_preference_comment" name="model_preference_comment" placeholder="Explain why model A or B is preferred..."></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model A Evaluation -->
+                <div class="form-section">
+                    <h3>Model A Evaluation</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelA_completeness">Completeness (1-5)</label>
+                            <select id="modelA_completeness" name="modelA_completeness">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelA_correctness">Correctness (1-5)</label>
+                            <select id="modelA_correctness" name="modelA_correctness">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelA_instruction_following">Instruction Following (1-5)</label>
+                            <select id="modelA_instruction_following" name="modelA_instruction_following">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelA_hallucination">Hallucination</label>
+                            <select id="modelA_hallucination" name="modelA_hallucination">
+                                <option value="">Select</option>
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelA_pros">Pros</label>
+                        <textarea id="modelA_pros" name="modelA_pros" placeholder="Pros for Model A..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelA_cons_completeness">Cons - Completeness</label>
+                            <textarea id="modelA_cons_completeness" name="modelA_cons_completeness" placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelA_cons_correctness">Cons - Correctness</label>
+                            <textarea id="modelA_cons_correctness" name="modelA_cons_correctness" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelA_cons_instruction_following">Cons - Instruction Following</label>
+                            <textarea id="modelA_cons_instruction_following" name="modelA_cons_instruction_following" placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelA_cons_hallucination">Cons - Hallucination</label>
+                            <textarea id="modelA_cons_hallucination" name="modelA_cons_hallucination" placeholder=""></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model B Evaluation -->
+                <div class="form-section">
+                    <h3>Model B Evaluation</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelB_completeness">Completeness (1-5)</label>
+                            <select id="modelB_completeness" name="modelB_completeness">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelB_correctness">Correctness (1-5)</label>
+                            <select id="modelB_correctness" name="modelB_correctness">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelB_instruction_following">Instruction Following (1-5)</label>
+                            <select id="modelB_instruction_following" name="modelB_instruction_following">
+                                <option value="">Select</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelB_hallucination">Hallucination</label>
+                            <select id="modelB_hallucination" name="modelB_hallucination">
+                                <option value="">Select</option>
+                                <option value="false">False</option>
+                                <option value="true">True</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="modelB_pros">Pros</label>
+                        <textarea id="modelB_pros" name="modelB_pros" placeholder="Pros for Model B..."></textarea>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelB_cons_completeness">Cons - Completeness</label>
+                            <textarea id="modelB_cons_completeness" name="modelB_cons_completeness" placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelB_cons_correctness">Cons - Correctness</label>
+                            <textarea id="modelB_cons_correctness" name="modelB_cons_correctness" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelB_cons_instruction_following">Cons - Instruction Following</label>
+                            <textarea id="modelB_cons_instruction_following" name="modelB_cons_instruction_following" placeholder=""></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelB_cons_hallucination">Cons - Hallucination</label>
+                            <textarea id="modelB_cons_hallucination" name="modelB_cons_hallucination" placeholder=""></textarea>
                         </div>
                     </div>
                 </div>
@@ -535,18 +645,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label>Response Time (seconds)</label>
-                        <input type="number" name="response_time_${promptCount}" min="1" value="1">
-                    </div>
-                    <div class="form-group">
-                        <label>Issue Type</label>
-                        <select name="issue_type_${promptCount}">
-                            <option value="">Select issue type</option>
-                            <option value="technical_inconsistency">Technical Inconsistency</option>
-                            <option value="tool">Tool</option>
-                            <option value="code_correctness">Code Correctness</option>
-                            <option value="setup">Setup</option>
-                            <option value="other">Other</option>
-                        </select>
+                        <input type="number" name="response_time_${promptCount}" min="1" value="600">
                     </div>
                 </div>
                 
@@ -569,78 +668,6 @@
                         <option value="1">1 (Only B is correct)</option>
                         <option value="2">2 (Both models are correct)</option>
                     </select>
-                    <div class="info-tooltip">
-                        <span class="tooltip-icon">?</span>
-                        <span class="tooltip-text">
-                            <strong>Level of Correctness:</strong><br>
-                            -1: Poor implementation with significant issues<br>
-                            0: Below average with some problems<br>
-                            1: Average implementation meeting basic requirements<br>
-                            2: Good implementation exceeding expectations
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="choices-grid">
-                    <div class="form-group">
-                        <label>Interaction Rating (0-7)</label>
-                        <select name="interaction_rating_${promptCount}">
-                            ${generateRatingOptions(0, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Code Logic (-1 to 7)</label>
-                        <select name="code_logic_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Naming Clarity (-1 to 7)</label>
-                        <select name="naming_clarity_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Organization Modularity (-1 to 7)</label>
-                        <select name="organization_modularity_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Interface Design (-1 to 7)</label>
-                        <select name="interface_design_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Error Handling (-1 to 7)</label>
-                        <select name="error_handling_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Documentation (-1 to 7)</label>
-                        <select name="documentation_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Review Readiness (-1 to 7)</label>
-                        <select name="review_readiness_${promptCount}">
-                            ${generateRatingOptions(-1, 7)}
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="rating-info">
-                    <strong>Rating Scale:</strong> -1 (Not Applicable), 0-3 (Preference for A), 4-7 (Preference for B)
                 </div>
                 
                 <div class="form-group">
@@ -656,40 +683,49 @@
             button.closest('.prompt-section').remove();
         }
 
-        function generateRatingOptions(min, max) {
-            let options = '<option value="">Select rating</option>';
-            for (let i = min; i <= max; i++) {
-                options += `<option value="${i}">${i}</option>`;
-            }
-            return options;
-        }
+        
 
         function exportJSON() {
             const formData = new FormData(document.getElementById('jsonForm'));
             
-            // Get selected task issue types as comma-separated string
-            const selectedIssueTypes = [];
-            const checkboxes = document.querySelectorAll('input[name="task_issue_types"]:checked');
-            checkboxes.forEach(checkbox => {
-                selectedIssueTypes.push(checkbox.value);
-            });
-            const taskIssueTypesString = selectedIssueTypes.join(', ');
-            
             // Build the JSON structure
             const jsonData = {
                 hfi_id: formData.get('hfi_id') || "",
-                task_type: formData.get('task_type') || "",
                 language: formData.get('language') || "",
                 interface: formData.get('interface') || "",
                 starting_commit_hash: formData.get('starting_commit_hash') || "",
                 jira: formData.get('jira') || "",
+                old_jira: formData.get('old_jira') || "",
                 root_gdrive: formData.get('root_gdrive') || "",
                 final_codebase_link: formData.get('final_codebase_link') || "",
                 usecase: formData.get('usecase') || "",
-                task_issue_types: taskIssueTypesString,
-                final_comment: {
-                    pros: formData.get('final_comment_pros') || "",
-                    cons: formData.get('final_comment_cons') || ""
+                model_preferences: formData.get('model_preferences') !== null && formData.get('model_preferences') !== "" ? parseInt(formData.get('model_preferences')) : undefined,
+                model_preference_comment: formData.get('model_preference_comment') || "",
+                modelA: {
+                    completeness: formData.get('modelA_completeness') ? parseInt(formData.get('modelA_completeness')) : undefined,
+                    correctness: formData.get('modelA_correctness') ? parseInt(formData.get('modelA_correctness')) : undefined,
+                    instruction_following: formData.get('modelA_instruction_following') ? parseInt(formData.get('modelA_instruction_following')) : undefined,
+                    hallucination: formData.get('modelA_hallucination') ? formData.get('modelA_hallucination') === 'true' : undefined,
+                    pros: formData.get('modelA_pros') || "",
+                    cons: {
+                        completeness: formData.get('modelA_cons_completeness') || "",
+                        correctness: formData.get('modelA_cons_correctness') || "",
+                        instruction_following: formData.get('modelA_cons_instruction_following') || "",
+                        hallucination: formData.get('modelA_cons_hallucination') || ""
+                    }
+                },
+                modelB: {
+                    completeness: formData.get('modelB_completeness') ? parseInt(formData.get('modelB_completeness')) : undefined,
+                    correctness: formData.get('modelB_correctness') ? parseInt(formData.get('modelB_correctness')) : undefined,
+                    instruction_following: formData.get('modelB_instruction_following') ? parseInt(formData.get('modelB_instruction_following')) : undefined,
+                    hallucination: formData.get('modelB_hallucination') ? formData.get('modelB_hallucination') === 'true' : undefined,
+                    pros: formData.get('modelB_pros') || "",
+                    cons: {
+                        completeness: formData.get('modelB_cons_completeness') || "",
+                        correctness: formData.get('modelB_cons_correctness') || "",
+                        instruction_following: formData.get('modelB_cons_instruction_following') || "",
+                        hallucination: formData.get('modelB_cons_hallucination') || ""
+                    }
                 },
                 worker_id: formData.get('worker_id') || "",
                 build_creator: formData.get('build_creator') || "default",
@@ -707,21 +743,10 @@
                 if (promptSection && promptSection.closest('.prompt-section')) {
                     const prompt = {
                         prompt: formData.get(`prompt_${i}`) || "",
-                        response_time_seconds: parseInt(formData.get(`response_time_${i}`)) || 1,
+                        response_time_seconds: parseInt(formData.get(`response_time_${i}`)) || 600,
                         pdf_link: formData.get(`pdf_link_${i}`) || "",
                         output_files_link: formData.get(`output_files_link_${i}`) || "",
-                        issue_type: formData.get(`issue_type_${i}`) || "",
-                        choices: {
-                            interaction_rating: parseInt(formData.get(`interaction_rating_${i}`)) || 0,
-                            code_logic: parseInt(formData.get(`code_logic_${i}`)) || 0,
-                            naming_clarity: parseInt(formData.get(`naming_clarity_${i}`)) || 0,
-                            organization_modularity: parseInt(formData.get(`organization_modularity_${i}`)) || 0,
-                            interface_design: parseInt(formData.get(`interface_design_${i}`)) || 0,
-                            error_handling: parseInt(formData.get(`error_handling_${i}`)) || 0,
-                            documentation: parseInt(formData.get(`documentation_${i}`)) || 0,
-                            review_readiness: parseInt(formData.get(`review_readiness_${i}`)) || 0
-                        },
-                        level_of_correctness: parseInt(formData.get(`level_of_correctness_${i}`)) || 0,
+                        level_of_correctness: formData.get(`level_of_correctness_${i}`) !== null && formData.get(`level_of_correctness_${i}`) !== "" ? parseInt(formData.get(`level_of_correctness_${i}`)) : undefined,
                         comment: formData.get(`comment_${i}`) || ""
                     };
                     jsonData.prompts.push(prompt);
@@ -747,8 +772,22 @@
             });
         }
 
-        // Add first prompt by default
+        // Add first prompt by default and try to prefill from prompt.txt
         addPrompt();
+        (async function prefillPrompt() {
+            try {
+                const resp = await fetch('prompt.txt', { cache: 'no-store' });
+                if (resp.ok) {
+                    const text = await resp.text();
+                    if (text && text.trim().length > 0) {
+                        const first = document.querySelector('[name="prompt_1"]');
+                        if (first) first.value = text.trim();
+                    }
+                }
+            } catch (e) {
+                // ignore fetch errors (e.g., local file access restrictions)
+            }
+        })();
 
         function clearAllFields() {
             document.getElementById('jsonForm').reset();
