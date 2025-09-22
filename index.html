@@ -647,6 +647,7 @@
                         <label>Response Time (seconds)</label>
                         <input type="number" name="response_time_${promptCount}" min="1" value="600">
                     </div>
+                    
                 </div>
                 
                 <div class="form-row">
@@ -667,6 +668,20 @@
                         <option value="0">0 (Both models are incorrect)</option>
                         <option value="1">1 (Only B is correct)</option>
                         <option value="2">2 (Both models are correct)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Choice</label>
+                    <select name="choice_${promptCount}">
+                        <option value="-4">-4</option>
+                        <option value="-3">-3</option>
+                        <option value="-2">-2</option>
+                        <option value="-1">-1</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
                     </select>
                 </div>
                 
@@ -746,6 +761,7 @@
                         response_time_seconds: parseInt(formData.get(`response_time_${i}`)) || 600,
                         pdf_link: formData.get(`pdf_link_${i}`) || "",
                         output_files_link: formData.get(`output_files_link_${i}`) || "",
+                        choice: formData.get(`choice_${i}`) !== null && formData.get(`choice_${i}`) !== "" ? parseInt(formData.get(`choice_${i}`)) : undefined,
                         level_of_correctness: formData.get(`level_of_correctness_${i}`) !== null && formData.get(`level_of_correctness_${i}`) !== "" ? parseInt(formData.get(`level_of_correctness_${i}`)) : undefined,
                         comment: formData.get(`comment_${i}`) || ""
                     };
