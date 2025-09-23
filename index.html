@@ -459,10 +459,24 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelA_interesting_prompt">Interesting Prompt?</label>
+                            <select id="modelA_interesting_prompt" name="modelA_interesting_prompt">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelA_interesting_prompt_comment">Interesting Prompt Comment</label>
+                            <textarea id="modelA_interesting_prompt_comment" name="modelA_interesting_prompt_comment" placeholder="Explain why this prompt is interesting..."></textarea>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="modelA_pros">Pros</label>
                         <textarea id="modelA_pros" name="modelA_pros" placeholder="Pros for Model A..."></textarea>
                     </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modelA_cons_completeness">Cons - Completeness</label>
@@ -533,10 +547,24 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="modelB_interesting_prompt">Interesting Prompt?</label>
+                            <select id="modelB_interesting_prompt" name="modelB_interesting_prompt">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modelB_interesting_prompt_comment">Interesting Prompt Comment</label>
+                            <textarea id="modelB_interesting_prompt_comment" name="modelB_interesting_prompt_comment" placeholder="Explain why this prompt is interesting..."></textarea>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="modelB_pros">Pros</label>
                         <textarea id="modelB_pros" name="modelB_pros" placeholder="Pros for Model B..."></textarea>
                     </div>
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="modelB_cons_completeness">Cons - Completeness</label>
@@ -722,6 +750,8 @@
                     instruction_following: formData.get('modelA_instruction_following') ? parseInt(formData.get('modelA_instruction_following')) : undefined,
                     hallucination: formData.get('modelA_hallucination') ? formData.get('modelA_hallucination') === 'true' : undefined,
                     pros: formData.get('modelA_pros') || "",
+                    interesting_prompt: formData.get('modelA_interesting_prompt') === 'true',
+                    interesting_prompt_comment: formData.get('modelA_interesting_prompt_comment') || "",
                     cons: {
                         completeness: formData.get('modelA_cons_completeness') || "",
                         correctness: formData.get('modelA_cons_correctness') || "",
@@ -735,6 +765,8 @@
                     instruction_following: formData.get('modelB_instruction_following') ? parseInt(formData.get('modelB_instruction_following')) : undefined,
                     hallucination: formData.get('modelB_hallucination') ? formData.get('modelB_hallucination') === 'true' : undefined,
                     pros: formData.get('modelB_pros') || "",
+                    interesting_prompt: formData.get('modelB_interesting_prompt') === 'true',
+                    interesting_prompt_comment: formData.get('modelB_interesting_prompt_comment') || "",
                     cons: {
                         completeness: formData.get('modelB_cons_completeness') || "",
                         correctness: formData.get('modelB_cons_correctness') || "",
@@ -787,6 +819,26 @@
                 return v.toString(16);
             });
         }
+
+        // Function to toggle visibility of interesting prompt comment fields
+        function toggleInterestingPromptComment(model) {
+            const select = document.getElementById(`${model}_interesting_prompt`);
+            const commentGroup = document.getElementById(`${model}_interesting_prompt_comment`).closest('.form-group');
+            
+            if (select.value === 'true') {
+                commentGroup.style.display = 'block';
+            } else {
+                commentGroup.style.display = 'none';
+            }
+        }
+
+        // Add event listeners for interesting prompt dropdowns
+        document.getElementById('modelA_interesting_prompt').addEventListener('change', () => toggleInterestingPromptComment('modelA'));
+        document.getElementById('modelB_interesting_prompt').addEventListener('change', () => toggleInterestingPromptComment('modelB'));
+
+        // Initialize visibility on page load
+        toggleInterestingPromptComment('modelA');
+        toggleInterestingPromptComment('modelB');
 
         // Add first prompt by default and try to prefill from prompt.txt
         addPrompt();
